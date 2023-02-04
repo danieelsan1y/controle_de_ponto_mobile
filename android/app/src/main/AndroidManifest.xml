@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.controle_de_ponto_mobile">
+    package="com.example.flutter_crud_restapi_example_master_androidx">
    <application
-        android:label="controle_de_ponto_mobile"
+        android:label="flutter_crud_restapi_example_master_androidx"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
