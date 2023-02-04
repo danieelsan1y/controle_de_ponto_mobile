@@ -40,11 +40,11 @@ static void my_application_activate(GApplication* application) {
   if (use_header_bar) {
     GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
     gtk_widget_show(GTK_WIDGET(header_bar));
-    gtk_header_bar_set_title(header_bar, "controle_de_ponto_mobile");
+    gtk_header_bar_set_title(header_bar, "flutter_crud_restapi_example_master_androidx");
     gtk_header_bar_set_show_close_button(header_bar, TRUE);
     gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
   } else {
-    gtk_window_set_title(window, "controle_de_ponto_mobile");
+    gtk_window_set_title(window, "flutter_crud_restapi_example_master_androidx");
   }
 
   gtk_window_set_default_size(window, 1280, 720);

@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "controle_de_ponto_mobile" "\0"
+            VALUE "FileDescription", "flutter_crud_restapi_example_master_androidx" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "controle_de_ponto_mobile" "\0"
+            VALUE "InternalName", "flutter_crud_restapi_example_master_androidx" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "controle_de_ponto_mobile.exe" "\0"
-            VALUE "ProductName", "controle_de_ponto_mobile" "\0"
+            VALUE "OriginalFilename", "flutter_crud_restapi_example_master_androidx.exe" "\0"
+            VALUE "ProductName", "flutter_crud_restapi_example_master_androidx" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

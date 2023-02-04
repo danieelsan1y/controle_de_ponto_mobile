@@ -1,15 +1,14 @@
 import 'dart:convert';
 import 'dart:ffi';
 
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:http/http.dart';
 
-import '../model/person.dart';
+import '../models/person.dart';
 
 class ApiService {
   final String apiUrl = "http://192.168.100.30:8080/person";
 
-  Future<List<Person>> getPersons() async {
+  Future<List<Person>> getPerson() async {
     Response res = await get(apiUrl);
 
     if (res.statusCode == 200) {
@@ -20,7 +19,7 @@ class ApiService {
     } else if (res.statusCode == 404) {
       return <Person>[];
     } else {
-      throw "Failed to load person list";
+      throw "Failed to load persons list";
     }
   }
 
@@ -28,7 +27,7 @@ class ApiService {
     final response = await get('$apiUrl/$id');
 
     if (response.statusCode == 200) {
-      print("GetPersonByID:" + id);
+      print("GetpersonByID:" + id);
       return Person.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load a person');
@@ -40,8 +39,8 @@ class ApiService {
       'name': person.name,
       'login': person.login,
       'lastname': person.lastname,
-      'acess': person.acess,
-      'status': person.status,
+      'access': person.acess,
+      'password': person.password
     };
 
     final Response response = await post(
@@ -54,7 +53,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return Person.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to post person');
+      throw Exception('Failed to post persons');
     }
   }
 
@@ -63,7 +62,7 @@ class ApiService {
       'name': person.name,
       'login': person.login,
       'lastname': person.lastname,
-      'acess': person.acess,
+      'access': person.acess,
       'status': person.status,
     };
 

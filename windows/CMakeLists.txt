@@ -1,10 +1,10 @@
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
-project(controle_de_ponto_mobile LANGUAGES CXX)
+project(flutter_crud_restapi_example_master_androidx LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-set(BINARY_NAME "controle_de_ponto_mobile")
+set(BINARY_NAME "flutter_crud_restapi_example_master_androidx")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
