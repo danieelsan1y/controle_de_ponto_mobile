@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'models/person.dart';
 import 'services/api_service.dart';
 
-enum Gender { male, female }
-
-enum Status { positive, dead, recovered }
-
 class EditDataWidget extends StatefulWidget {
   EditDataWidget(this.person);
 

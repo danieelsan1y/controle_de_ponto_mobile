@@ -48,7 +48,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('Gender:',
+                            Text('Status:',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(widget.person.lastname,
