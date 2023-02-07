@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'adddatawidget.dart';
-import 'caseslist.dart';
+import 'personlist.dart';
 import 'models/person.dart';
 import 'services/api_service.dart';
 
@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final ApiService api = ApiService();
-  List<Person> casesList = [];
+  List<Person> personList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
               }
               print("feature builder");
               print(snapshot.connectionState);
-              return casesList.length > 0
-                  ? CasesList(cases: casesList)
+              return personList.length > 0
+                  ? PersonList(persons: personList)
                   : Center(
                       child: Text('No data found, tap plus button to add!',
                           style: Theme.of(context).textTheme.headline6));
@@ -76,14 +76,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<List<Person>> loadList() async {
     print("load list");
-    Future<List<Person>> futureCases = api.getPerson();
-    futureCases.then((casesList) {
+    Future<List<Person>> futurePerson = api.getPerson();
+    futurePerson.then((personList) {
       print("setState");
       //setState(() {
-      this.casesList = casesList;
+      this.personList = personList;
       //});
     });
-    return futureCases;
+    return futurePerson;
   }
 
   Future<void> _getData() async {

@@ -7,6 +7,8 @@ import '../models/person.dart';
 
 class ApiService {
   final String apiUrl = "http://192.168.100.30:8080/person";
+  final String pathDisable = "/status/inactivate/";
+  final String pathEnable = "/status/activate/";
 
   Future<List<Person>> getPerson() async {
     Response res = await get(apiUrl);
@@ -80,13 +82,17 @@ class ApiService {
     }
   }
 
-  Future<void> deletePerson(String id) async {
-    Response res = await delete('$apiUrl/$id');
-
-    if (res.statusCode == 200) {
-      print("Person deleted");
+  Future<void> deletePerson(String id, String status) async {
+    Response res;
+    if (status == 'ATIVO') {
+      res = await put('$apiUrl$pathDisable$id');
     } else {
-      throw "Failed to delete a person.";
+      res = await put('$apiUrl$pathEnable$id');
+    }
+    if (res.statusCode == 200) {
+      print("Person disabled");
+    } else {
+      throw "Failed to disabled a person.";
     }
   }
 }

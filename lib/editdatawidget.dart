@@ -2,30 +2,53 @@ import 'package:flutter/material.dart';
 import 'models/person.dart';
 import 'services/api_service.dart';
 
-class AddDataWidget extends StatefulWidget {
-  AddDataWidget();
+enum Gender { male, female }
+
+enum Status { positive, dead, recovered }
+
+class EditDataWidget extends StatefulWidget {
+  EditDataWidget(this.person);
+
+  final Person person;
 
   @override
-  _AddDataWidgetState createState() => _AddDataWidgetState();
+  _EditDataWidgetState createState() => _EditDataWidgetState();
 }
 
-class _AddDataWidgetState extends State<AddDataWidget> {
-  _AddDataWidgetState();
+class _EditDataWidgetState extends State<EditDataWidget> {
+  _EditDataWidgetState();
 
   final ApiService api = ApiService();
   final _addFormKey = GlobalKey<FormState>();
-  String access = 'FUNCIONARIO';
-  AcessPerson _access = AcessPerson.FUNCIONARIO;
+  String id = '';
   final _nameController = TextEditingController();
   final _loginController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _passwordController = TextEditingController();
+  String acess = 'FUNCIONARIO';
+  AcessPerson _acess = AcessPerson.FUNCIONARIO;
+
+  @override
+  void initState() {
+    id = widget.person.id;
+    _nameController.text = widget.person.name;
+    acess = widget.person.acess;
+    if (widget.person.acess == 'FUNCIONARIO') {
+      _acess = AcessPerson.FUNCIONARIO;
+    } else {
+      _acess = AcessPerson.DENTISTA;
+    }
+    _loginController.text = widget.person.login;
+    _lastNameController.text = widget.person.lastname;
+    _passwordController.text = widget.person.password;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastrar Usuário'),
+        title: Text('Editar Pessoas'),
       ),
       body: Form(
         key: _addFormKey,
@@ -42,27 +65,7 @@ class _AddDataWidgetState extends State<AddDataWidget> {
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                           child: Column(
                             children: <Widget>[
-                              TextFormField(
-                                controller: _loginController,
-                                decoration: const InputDecoration(
-                                  hintText: 'Login',
-                                ),
-                                keyboardType: TextInputType.number,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter age';
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {},
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Column(
-                            children: <Widget>[
+                              Text('Nome'),
                               TextFormField(
                                 controller: _nameController,
                                 decoration: const InputDecoration(
@@ -83,6 +86,7 @@ class _AddDataWidgetState extends State<AddDataWidget> {
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                           child: Column(
                             children: <Widget>[
+                              Text('Sobrenome'),
                               TextFormField(
                                 controller: _lastNameController,
                                 decoration: const InputDecoration(
@@ -103,18 +107,13 @@ class _AddDataWidgetState extends State<AddDataWidget> {
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                           child: Column(
                             children: <Widget>[
+                              Text('Senha'),
                               TextFormField(
                                 controller: _passwordController,
                                 obscureText: true,
                                 decoration: const InputDecoration(
                                   hintText: 'Senha',
                                 ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Por favor inserir a senha';
-                                  }
-                                  return null;
-                                },
                                 onChanged: (value) {},
                               ),
                             ],
@@ -129,11 +128,11 @@ class _AddDataWidgetState extends State<AddDataWidget> {
                                 title: const Text('Dentista'),
                                 leading: Radio(
                                   value: AcessPerson.DENTISTA,
-                                  groupValue: _access,
+                                  groupValue: _acess,
                                   onChanged: (AcessPerson? value) {
                                     setState(() {
-                                      _access = value!;
-                                      access = 'DENTISTA';
+                                      _acess = value!;
+                                      acess = 'DENTISTA';
                                     });
                                   },
                                 ),
@@ -142,11 +141,11 @@ class _AddDataWidgetState extends State<AddDataWidget> {
                                 title: const Text('Funcionário'),
                                 leading: Radio(
                                   value: AcessPerson.FUNCIONARIO,
-                                  groupValue: _access,
+                                  groupValue: _acess,
                                   onChanged: (AcessPerson? value) {
                                     setState(() {
-                                      _access = value!;
-                                      access = 'FUNCIONARIO';
+                                      _acess = value!;
+                                      acess = 'FUNCIONARIO';
                                     });
                                   },
                                 ),
@@ -162,19 +161,22 @@ class _AddDataWidgetState extends State<AddDataWidget> {
                                 onPressed: () {
                                   if (_addFormKey.currentState!.validate()) {
                                     _addFormKey.currentState!.save();
-                                    api.createPerson(Person(
-                                        name: _nameController.text,
-                                        login: _loginController.text,
-                                        lastname: _lastNameController.text,
-                                        acess: access,
-                                        password: _passwordController.text,
-                                        status: '',
-                                        id: ''));
+                                    api.updatePerson(
+                                        id,
+                                        Person(
+                                            id: '',
+                                            login: _loginController.text,
+                                            name: _nameController.text,
+                                            lastname: _lastNameController.text,
+                                            acess: acess,
+                                            status: '',
+                                            password:
+                                                _passwordController.text));
 
                                     Navigator.pop(context);
                                   }
                                 },
-                                child: Text('Cadastrar',
+                                child: Text('Salvar',
                                     style: TextStyle(color: Colors.white)),
                               )
                             ],
